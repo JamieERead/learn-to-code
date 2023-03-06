@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Tab, Tabs } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import IngredientsList from "../../components/IngredientsList";
 import MealList from "../../components/MealList";
 
 const ShoppingListScreen = () => {
@@ -16,7 +17,9 @@ const ShoppingListScreen = () => {
         <Tab eventKey="byMeal" title="Per Meal">
           <MealList />
         </Tab>
-        <Tab eventKey="byIng" title="All Ingredients"></Tab>
+        <Tab eventKey="byIng" title="All Ingredients">
+          <IngredientsList />
+        </Tab>
       </Tabs>
     </div>
   );
