@@ -1,14 +1,15 @@
 import React from "react";
 import { Col, Form, ListGroup, Row } from "react-bootstrap";
-import { IMealComplete } from "../../types";
+import { IMealComplete, IMealIngredient } from "../../types";
 
 interface Props {
-  meal: IMealComplete;
-  onHandleChange: (meal: IMealComplete) => void;
+  meal: IMealComplete | IMealIngredient;
+  onHandleChange: (meal: IMealComplete | IMealIngredient) => void;
 }
 
 const ListItem: React.FC<Props> = ({ meal, onHandleChange }) => {
-  const getName = (item: IMealComplete) => {
+  const getName = (item: IMealComplete | IMealIngredient) => {
+    // @ts-ignore
     return item.count > 1 ? `${item.count} x ${item.name}` : item.name;
   };
 

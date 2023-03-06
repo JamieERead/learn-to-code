@@ -1,5 +1,6 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
+import { IMealComplete } from "../../types";
 import ListItem from "../ListItem";
 import RandomBoxForm from "../RandomBoxForm";
 
@@ -9,9 +10,14 @@ interface Props {
 }
 
 const ListContainer: React.FC<Props> = ({ groupId, title }) => {
-  const meals = [
-    { name: "fish", count: 1, checked: false },
-    { name: "chips", count: 5, checked: true },
+  const meals: IMealComplete[] = [
+    {
+      name: "fish",
+      checked: false,
+      ingredients: [
+        { name: "salmon", checked: false, category: "meat", count: 1 },
+      ],
+    },
   ];
 
   const onHandleChange = () => {};
