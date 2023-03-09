@@ -1,38 +1,29 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { IMealIngredient, IMealIngredientCategory } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { updateIngredient } from "../../redux/shopping/shoppingReducer";
+import { getShoppingListByIngredients } from "../../redux/shopping/shoppingSelector";
 import ListItem from "../ListItem";
 import ProgressCounter from "../ProgressCounter";
 
 const IngredientsList = () => {
-  const ingredients: IMealIngredient[] = [
-    { name: "salmon", checked: false, category: "meat", count: 1 },
-  ];
+  const ingredients = useAppSelector(getShoppingListByIngredients);
+  const dispatch = useAppDispatch();
 
-  const ingCat: IMealIngredientCategory[] = [
-    {
-      name: "meat",
-      values: ingredients,
-    },
-  ];
-
-  const count = {
-    total: 10,
-    checked: 5,
+  const onHandleChange = (category: string, ingredient: string) => {
+    dispatch(updateIngredient({ category, ingredient }));
   };
-
-  const onHandleChange = () => {};
 
   return (
     <>
-      <ProgressCounter count={count} />
-      {ingCat.map((cat) => (
-        <Card>
+      <ProgressCounter />
+      {ingredients.map((cat) => (
+        <Card className="mb-4">
           <Card.Header>{cat.name}</Card.Header>
           <Card.Body>
             {cat.values.map((ing, index) => (
               <ListItem
-                onHandleChange={onHandleChange}
+                onHandleChange={() => onHandleChange(cat.name, ing.name)}
                 key={index}
                 meal={ing}
               />

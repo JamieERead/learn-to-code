@@ -10,8 +10,13 @@ import {
   REGISTER,
 } from "redux-persist";
 import { configureStore } from "@reduxjs/toolkit";
+import mealsReducer from "./meals/mealsReducer";
+import shoppingReducer from "./shopping/shoppingReducer";
 
-const reducers = combineReducers({});
+const reducers = combineReducers({
+  meals: mealsReducer,
+  shopping: shoppingReducer,
+});
 
 const presistConfig = {
   key: "root",

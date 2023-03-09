@@ -1,6 +1,9 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
-import { IMealComplete } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { setRandomMeals, updateMeal } from "../../redux/meals/mealsReducer";
+import { getMealsForGroup } from "../../redux/meals/mealsSelectors";
+import { IMealComplete, IMealIngredient } from "../../types";
 import ListItem from "../ListItem";
 import RandomBoxForm from "../RandomBoxForm";
 
@@ -10,26 +13,23 @@ interface Props {
 }
 
 const ListContainer: React.FC<Props> = ({ groupId, title }) => {
-  const meals: IMealComplete[] = [
-    {
-      name: "fish",
-      checked: false,
-      ingredients: [
-        { name: "salmon", checked: false, category: "meat", count: 1 },
-      ],
-    },
-  ];
+  const meals = useAppSelector((state) => getMealsForGroup(state, groupId));
+  const dispatch = useAppDispatch();
 
-  const onHandleChange = () => {};
+  const onHandleChange = (meal: IMealComplete | IMealIngredient) => {
+    dispatch(updateMeal({ groupId, meal }));
+  };
 
-  const onPickRandomMeal = () => {};
+  const onPickRandomMeal = (value: string) => {
+    dispatch(setRandomMeals({ groupId, value }));
+  };
 
   return (
     <div>
       <h2 className="mt-4">{title}</h2>
       <RandomBoxForm
         onPickRandomMeal={onPickRandomMeal}
-        maxLength={10} // TODO update and pass in the actual length
+        maxLength={meals.length}
       />
       <ListGroup>
         {meals.map((meal) => (

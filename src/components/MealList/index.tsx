@@ -1,20 +1,18 @@
 import React from "react";
 import { Accordion } from "react-bootstrap";
-import { IMealComplete } from "../../types";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { updateMealIngredient } from "../../redux/shopping/shoppingReducer";
+import { getShoppingListByMeal } from "../../redux/shopping/shoppingSelector";
+import { IMealComplete, IMealIngredient } from "../../types";
 import ListItem from "../ListItem";
 
 const MealList = () => {
-  const meals: IMealComplete[] = [
-    {
-      name: "fish",
-      checked: false,
-      ingredients: [
-        { name: "salmon", checked: false, category: "meat", count: 1 },
-      ],
-    },
-  ];
+  const meals = useAppSelector(getShoppingListByMeal);
+  const dispatch = useAppDispatch();
 
-  const onHandleChange = () => {};
+  const onHandleChange = (meal: IMealComplete, ing: IMealIngredient) => {
+    dispatch(updateMealIngredient({ meal, ingredient: ing }));
+  };
 
   return (
     <Accordion defaultActiveKey="0">
@@ -27,7 +25,7 @@ const MealList = () => {
           <Accordion.Body>
             {meal.ingredients.map((ing, index) => (
               <ListItem
-                onHandleChange={onHandleChange}
+                onHandleChange={() => onHandleChange(meal, ing)}
                 meal={ing}
                 key={index}
               />
