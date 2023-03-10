@@ -1,6 +1,5 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
 import { Container } from "react-bootstrap";
 import HomeScreen from "./screens/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";

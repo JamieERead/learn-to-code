@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { clearSelectedMeals } from "../../redux/meals/mealsReducer";
 import { getSelectedMeals } from "../../redux/meals/mealsSelectors";
 import { createShoppingList } from "../../redux/shopping/shoppingReducer";
+import "./footer.css";
 
 const FooterButtons: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const FooterButtons: React.FC = () => {
   };
 
   return (
-    <Row className="mt-4">
+    <Row className="mt-4 footer">
       <Col>
         <Button variant="danger" onClick={clearMeals}>
           Clear

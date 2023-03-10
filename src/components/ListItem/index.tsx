@@ -22,7 +22,11 @@ const ListItem: React.FC<Props> = ({ meal, onHandleChange }) => {
       <Row>
         <Col>{getName(meal)}</Col>
         <Col xs={2} className="text-center">
-          <Form.Check type="checkbox" checked={meal.checked} />
+          <Form.Check
+            type="checkbox"
+            onChange={() => {}}
+            checked={meal.checked}
+          />
         </Col>
       </Row>
     </ListGroup.Item>
